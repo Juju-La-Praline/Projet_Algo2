@@ -27,7 +27,7 @@ def creer_grille2(z):# crée la grille a partir d'un fichier
             Vtemp = [int(i) for i in ligne_split]
             
             if Vtemp != []:
-                tail_max_C=max(max(Vtemp),tail_max_C)
+                tail_max_C=max(len(Vtemp),tail_max_C)
             tabic+= [Vtemp]
             
         else:
@@ -35,12 +35,12 @@ def creer_grille2(z):# crée la grille a partir d'un fichier
             Vtemp2=[int(i) for i in ligne_split2]
 
             if Vtemp2 != []:
-                tail_max_L=max(max(Vtemp2),tail_max_L)
+                tail_max_L=max(len(Vtemp2),tail_max_L)
             tabil+= [Vtemp2]
             
     M=i       
     fichier.close()
-    g = Grille(N, M, tabil, tabic, tail_max_L, tail_max_C)
+    g = Grille(N, M, tabil, tabic, tail_max_L+1, tail_max_C+3)
 
     return g
 
