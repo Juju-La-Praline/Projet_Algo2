@@ -6,7 +6,7 @@ def affichage_fenetre(grille):
     
     largeur = (grille.nMl + grille.M) * 10
     hauteur = (grille.nMc + grille.N) * 10
-    taille_case = 5
+    taille_case = 20
     fenetre = Tk()
     nMc = grille.nMc
     nMl = grille.nMl

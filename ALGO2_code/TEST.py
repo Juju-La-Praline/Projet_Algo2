@@ -5,7 +5,7 @@ from Parse1 import *
 
 a1='0.txt'
 a2='1.txt'
-a3='10.txt'
+a3='5.txt'
 
 g1 = creer_grille2(a3)
 
