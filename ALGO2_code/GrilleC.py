@@ -10,6 +10,8 @@ class Grille:
         self.nMc = nMc # taille max du nombre de sl dans les colones
         self.SetCi=[]
         self.SetLi=[]
+        self.Kn = 0
+        self.Kp = 0
         for i in range(self.N) :
 
             ligne = list()
@@ -19,7 +21,22 @@ class Grille:
                 ligne.append(-1)
                 
             self.Gr.append(ligne)
+    def EstComplete(self,N):
+        n=0
+        for i in range(self.N) :
 
+            for j in range(self.M) :
+                
+                if self.Gr[i][j] == -1:
+                     
+                    if  n == N:                 
+                        self.Kn = i + self.M*j
+                    
+                        return False
+                    n+=n
+        return True
+                
+            
             
 
     '''def affiche_grille(self):

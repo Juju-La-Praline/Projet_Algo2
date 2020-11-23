@@ -1,6 +1,6 @@
-
 from Parse import *
 from Graphic import *
+from version_jsupSLM import *
 
 
 def jsupSL(j, l, sl):# l taille de la sous sequence  , S la sous sequence
@@ -122,14 +122,14 @@ def colorL(a,i):
         #print("indice=",indice,"i=",i)
         if a.Gr[i][indice] == -1:
             a.Gr[i][indice]= 2
-            
+            D= dict()
             #print(i,len(a.tabil[i]), a.tabil[i], a.Gr[i])
-            noirV = jsupSLM(a.M-1, len(a.tabil[i]), a.tabil[i], a.Gr[i])#test avec case noir 
+            noirV = jsupSLMO(a.M-1, len(a.tabil[i]), a.tabil[i], a.Gr[i], D)#test avec case noir 
             #print("noirV ",noirV)
             #print(a.Gr[i])
             a.Gr[i][indice]= 1
-            
-            blancV = jsupSLM(a.M-1, len(a.tabil[i]), a.tabil[i], a.Gr[i])#test avec case bblanche
+            D1= dict()
+            blancV = jsupSLMO(a.M-1, len(a.tabil[i]), a.tabil[i], a.Gr[i], D1)#test avec case bblanche
             
             #print("blancV ",blancV)
             #print(a.Gr[i])
@@ -163,12 +163,14 @@ def colorC(a,j):
             if a.Gr[indice][j] == -1:
                 a.Gr[indice][j]= 2
                 colone[indice]=2
-                noirV = jsupSLM(a.N-1, len(a.tabic[j]), a.tabic[j], colone)#test avec case noir 
+                D=dict()
+                noirV = jsupSLMO(a.N-1, len(a.tabic[j]), a.tabic[j], colone, D)#test avec case noir 
                 #print("noirV ",noirV)
                 #print(colone)
                 a.Gr[indice][j]= 1
                 colone[indice]=1
-                blancV = jsupSLM(a.N-1, len(a.tabic[j]), a.tabic[j], colone)#test avec case bblanche
+                D1= dict()
+                blancV = jsupSLMO(a.N-1, len(a.tabic[j]), a.tabic[j], colone, D1)#test avec case bblanche
                 #print("blancV",blancV)
                 #print("colone",colone)
 
@@ -195,7 +197,7 @@ def colorC(a,j):
     return True # colone recupe
 
 
-def coloration(A):#a grille
+def coloration2(A):#a grille
     a = A #a
 
     coloneAvoir = [i for i in range(len(a.tabic))]
@@ -204,7 +206,8 @@ def coloration(A):#a grille
     print(ligneAvoir)
     verif = False
     verif2 = False
-    verif3 = "ne sait pas"
+    verif3 = True
+    verif4 = "ne sait pas"
     nouv= []
     nouv2 =  []
     while ligneAvoir != [] or coloneAvoir != [] :
@@ -251,6 +254,16 @@ def coloration(A):#a grille
         #verifier si cases coloriées verif 3
         
     affichage_fenetre(a)
-    print(verif3)
-    return verif3
+    verif3 = a.EstComplete(0)
+    print(a.Kp)
+    if verif3 == True:
+       
+        print(verif3)
+        return verif3
+    else :
+        print(verif4)
+        return verif4
+    
+
+
 

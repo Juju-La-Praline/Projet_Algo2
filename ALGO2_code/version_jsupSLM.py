@@ -1,4 +1,4 @@
-def jsupSLM(j, l, sl, ligne):# l taille de la sous sequence  , S la sous sequence
+def jsupSLMO(j, l, sl, ligne, D):# l taille de la sous sequence  , S la sous sequence
     #print("\n")
     
     #print("jsupSLMP(j=",j,", l=",l,", sl, ligne)")
@@ -13,8 +13,8 @@ def jsupSLM(j, l, sl, ligne):# l taille de la sous sequence  , S la sous sequenc
     
     #print(j)
     
-    
-    D=dict()
+    #print ("j = ",j,"l = ",l)
+    #print (D)
     
     
     if l == 0 :                     #cas où il n'y a pas de blocs 
@@ -47,7 +47,7 @@ def jsupSLM(j, l, sl, ligne):# l taille de la sous sequence  , S la sous sequenc
                 
                 if (j - 1 , l) not in D :
             
-                    D[j - 1 , l] = jsupSLM(j - 1, l, sl, ligne)
+                    D[j - 1 , l] = jsupSLMO(j - 1, l, sl, ligne, D)
                     
                 return D[j - 1 , l]
                 
@@ -61,7 +61,7 @@ def jsupSLM(j, l, sl, ligne):# l taille de la sous sequence  , S la sous sequenc
                 
                 if (j - 1 , l) not in D :
                     
-                    D[j - 1 , l] = jsupSLM(j - 1, l, sl, ligne)
+                    D[j - 1 , l] = jsupSLMO(j - 1, l, sl, ligne, D)
                     
                 return D[j - 1 , l]
                 
@@ -83,15 +83,21 @@ def jsupSLM(j, l, sl, ligne):# l taille de la sous sequence  , S la sous sequenc
         #return jsupSLM(j - sl[l-1]-1, l-1, sl, ligne) or jsupSLM(j - 1, l, sl, ligne)   
         k = j - sl[l-1] - 1
         
-        if ( k , l - 1) not in D :
+        if ( k , l - 1) not in D :# if in D ? faire le or quand meme 
             #print("appel", k, l-1)
-            D[k , l - 1] = jsupSLM(j - sl[l-1]-1, l-1, sl, ligne)
+            D[k , l - 1] = jsupSLMO(j - sl[l-1]-1, l-1, sl, ligne, D)# le or ?
+
             if D[k, l - 1] == True :
                 return True
+         
+        if (j-1, l) not in D:
+            D[j - 1 , l] = jsupSLMO(j - 1, l, sl, ligne, D)
             
-        if (j, l - 1) not in D:
-            D[j - 1 , l] = jsupSLM(j - 1, l, sl, ligne)
-            return D[j - 1 , l]
+
+        
+        return D[k , l - 1] or D[j - 1 , l]
+            
+        
         
 
     if ligne[j] == 1:#blanc
@@ -99,7 +105,8 @@ def jsupSLM(j, l, sl, ligne):# l taille de la sous sequence  , S la sous sequenc
         #○print("ligne[j-1]==1")
         #return jsupSLM(j - 1, l, sl, ligne) # case blanche
         if (j - 1 , l) not in D :
-            D[j - 1 , l] = jsupSLM(j - 1, l, sl, ligne)
+            D[j - 1 , l] = jsupSLMO(j - 1, l, sl, ligne, D)
+
         return D[j - 1 , l]
         
 
@@ -131,7 +138,7 @@ def jsupSLM(j, l, sl, ligne):# l taille de la sous sequence  , S la sous sequenc
             k = j - sl[l-1] - 1
             if (k, l - 1) not in D :
                     
-                    D[k, l - 1] = jsupSLM(j - sl[l-1] -1, l - 1, sl, ligne)
+                    D[k, l - 1] = jsupSLMO(j - sl[l-1] -1, l - 1, sl, ligne, D)
                     
             return D[k, l - 1]
             #return jsupSLM(j - sl[l-1] -1, l - 1, sl, ligne) # cas case noire trouvée 

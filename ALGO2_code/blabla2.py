@@ -14,3 +14,5 @@ print(l2)
 z="12 14 1 0"
 e="14"
 print(int(e))
+
+print (10//3)
