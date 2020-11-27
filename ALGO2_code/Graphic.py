@@ -2,6 +2,8 @@ from tkinter import *
 from GrilleC import *
 
 def affichage_fenetre(grille):
+    """ affiche une grille dans une fenêtre graphique
+    """
 
     
     largeur = (grille.nMl + grille.M) * 10
