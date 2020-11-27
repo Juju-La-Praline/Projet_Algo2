@@ -3,7 +3,11 @@ from Graphic import *
 from version_jsupSLM import *
 
 
-def jsupSL(j, l, sl):# l taille de la sous sequence  , S la sous sequence
+def jsupSL(j, l, sl):
+    """
+    pour j un indice, une sous sequence sl de taille l,
+    la fonction retourne True si T(j,l) est vrai, Faux sinon.
+    """
     if l == 0 :
         return True
 
