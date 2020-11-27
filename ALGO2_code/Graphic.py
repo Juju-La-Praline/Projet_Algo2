@@ -2,7 +2,8 @@ from tkinter import *
 from GrilleC import *
 
 def affichage_fenetre(grille):
-    """ affiche une grille dans une fenêtre graphique
+    """ affiche une grille et ses séquences d'entiers correspondantes
+        dans une fenêtre graphique.
     """
 
     
