@@ -13,8 +13,8 @@ class Grille:
         self.tabil = tabil      # liste des sl des lignes
         self.nMl = nMl          # taille max du nombre de sl dans les lignes
         self.nMc = nMc          # taille max du nombre de sl dans les colonnes
-        self.SetCi=[]           #  ?
-        self.SetLi=[]           # ?
+        self.SetCi=[]           # la liste des lignes modifiées lors d'un appel à colorC(a,j)
+        self.SetLi=[]           # liste des colonnes modifiées lors d'un appel à colorL(a,i)
         self.Kn = 0            
         self.Kp = 0
         for i in range(self.N) :# initialisation de la grille à -1
