@@ -9,10 +9,10 @@ def affichage_fenetre(grille):
     
     largeur = (grille.nMl + grille.M) * 10
     hauteur = (grille.nMc + grille.N) * 10
-    taille_case = 35
+    taille_case = 5
     fenetre = Tk()
-    nMc = grille.nMc
-    nMl = grille.nMl
+    nMc = grille.nMc*1.5
+    nMl = grille.nMl*1.5
     can = Canvas(fenetre, width=largeur, height=hauteur,bg="white")
     for j in range (grille.N + 1):
         x1j = 0
@@ -63,7 +63,7 @@ def affichage_fenetre(grille):
         x1q = nMl * taille_case/2
         y1q = taille_case * (o+1) + nMc * taille_case + taille_case/2
 
-        can.create_text(x1q, y1q, text=strl)
+        can.create_text(x1q, y1q, text=strl,font = ("Helvetica", taille_case))
         
    
     
@@ -74,7 +74,7 @@ def affichage_fenetre(grille):
         x1r = taille_case * (p+1) + nMl * taille_case + taille_case/2
         y1r = nMc * taille_case/2
 
-        can.create_text(x1r, y1r, text= strC, width=1 )
+        can.create_text(x1r, y1r, text= strC, width=1, font = ("Helvetica", taille_case) )
 
     can.pack(fill=BOTH, expand=1)
     

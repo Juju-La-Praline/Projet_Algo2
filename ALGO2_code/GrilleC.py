@@ -29,23 +29,24 @@ class Grille:
             
             
             
-    def EstComplete(self,N):
+    def EstComplete(self):
         """ 
         retourne True si toutes les cases de la grille ont été coloriées,
         Faux sinon 
         """
-        n=0
+        
         for i in range(self.N) :
 
             for j in range(self.M) :
                 
                 if self.Gr[i][j] == -1:
                      
-                    if  n == N:                 
-                        self.Kn = i + self.M*j
+                                  
+                    self.Kn = i*self.M + j 
                     
-                        return False
-                    n+=n
+                    return False
+                    
+        print("true")
         return True
                 
             

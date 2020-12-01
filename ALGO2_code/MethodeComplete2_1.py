@@ -1,40 +1,58 @@
-from Projet2 import *
-
+from Propagation1_3 import *
+from copy import *
+from Graphic import *
 
 def enumeration(A): 
     ok = coloration2(A)
-    a=A
+    a = deepcopy(A)
     if ok == False:
        return False
+    
     else:
-        print (a.Kp)
-        enum_rec(a,a.Kp,1) or enum_rec(a,a.Kp,2)
+        a.EstComplete()
+        #print("oui")
+        
+        return enum_rec(a,a.Kn,1) or enum_rec(a,a.Kn,2)
+        
+        
         
 
 def enum_rec(A,indice,c):
+
+    #if c == 2:
+        #print("noire")
     if indice == A.N * A.M:
-        return True
+        return True,A
+    #print("indice",indice,"N,M",A.N,A.M)
     i = indice // A.M 
     j = indice % A.M
-    print("i ",i,"j ",j)
+
+    #print("i ",i,"j ",j,"azeazea")
+    #print("fluteeeee",A.Kp)
+    ok,a=coloration_propagation(A,i,j,c)
     
-    ok=coloration_propagation(A,i,j,c)
-    a=A
     if ok == False:
+        #print("false")
         return False
     if ok == True:
+        #print("true")
+        affichage_fenetre(a)
         return True
     
-    a.EstComplete(1)
-    return enum_rec(a,a.Kn,1) or enum_rec(a,A.Kn,2)
+    a.EstComplete()
+    #print("or sait pas",a.Kn)
+    
+    return enum_rec(a,a.Kn,1) or enum_rec(a,a.Kn,2)
 
 def coloration_propagation(A,i,j,c):
-    a = A #a
+    a  = deepcopy(A)  #a
     a.Gr[i][j]= c
+    #"print("a.Gr[i][j]",a.Gr[i][j])
+    #affichage_fenetre(a)
     coloneAvoir = [j]
     ligneAvoir = [i]
-    print(coloneAvoir)
-    print(ligneAvoir)
+    #print(coloneAvoir)
+    #print(ligneAvoir)
     verif = False
     verif2 = False
     verif3 = True
@@ -50,7 +68,8 @@ def coloration_propagation(A,i,j,c):
             verif = colorL(a,i)
             
             if not(verif):
-                return False
+                #print("cl false")
+                return False,a 
             #print("setli",a.SetLi)
             nouv += [i for i in a.SetLi if i not in nouv] #colone j ou une case a eté  coloriée 
             #affichage_fenetre(a)
@@ -69,7 +88,8 @@ def coloration_propagation(A,i,j,c):
             verif2 = colorC(a,j)
             #print("sprez")
             if not(verif2):
-                return False
+                #print("cc false")
+                return False,a 
 
             nouv2 += [i for i in a.SetCi if i not in nouv2] #colone j ou une case a eté  coloriée 
             #print("nouv2",nouv2)
@@ -85,14 +105,17 @@ def coloration_propagation(A,i,j,c):
         #verifier si cases coloriées verif 3
         
     #affichage_fenetre(a)
-    verif3 = a.EstComplete(0)
+    
+    
+    #print(a.Kn)
+    verif3 = a.EstComplete()
     
     if verif3 == True:
        
-        
-        return verif3
+        #print(verif3)
+        return verif3,a 
     else :
-        
-        return verif4
+        #print("ve4")
+        return verif4,a
 
 

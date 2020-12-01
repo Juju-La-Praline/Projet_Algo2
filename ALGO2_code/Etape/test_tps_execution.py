@@ -6,13 +6,14 @@ from ProPar2 import *
 import time
 
 temp = 0
-a = '5.txt'
+a = '16.txt'
 
-for i in range(0,20):
+for i in range(0,5):
     debut = time.time()
     g = creer_grille2(a)
-    res = coloration2(g)
+    #res = coloration2(g)
+    res = enumeration(g)
     fin = time.time()
     temp += fin - debut
 
-print( "Temps d'exécution moyen : ", temp/20)
+print( "Temps d'exécution moyen : ", temp/5)

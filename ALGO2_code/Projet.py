@@ -200,8 +200,8 @@ def coloration(A):#a grille
 
     coloneAvoir = [i for i in range(len(a.tabic))]
     ligneAvoir = [i for i in range(len(a.tabil))]
-    print(coloneAvoir)
-    print(ligneAvoir)
+    #print(coloneAvoir)
+    #print(ligneAvoir)
     verif = False
     verif2 = False
     verif3 = "ne sait pas"

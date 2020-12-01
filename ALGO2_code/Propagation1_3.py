@@ -1,122 +1,4 @@
-from Parse import *
-from Graphic import *
-from version_jsupSLM import *
-
-
-def jsupSL(j, l, sl):
-    """
-    pour j un indice, une sous sequence sl de taille l,
-    la fonction retourne True si T(j,l) est vrai, Faux sinon.
-    """
-    if l == 0 :       #il n'y a pas de bloc
-        return True
-                     #il y a au moins 1 bloc
-    elif j < sl[l-1] - 1:   #j est trop petit
-        return False
-    
-    elif j == sl[l-1] - 1: #il y a assez de place pour un bloc seuleument
-
-        if l == 1:       
-
-            return True
-        else :
-            return False
-    else:                   #appel récursif case j noire ou blanche
-        return jsupSL(j - sl[l-1] - 1, l - 1, sl ) or jsupSL(j - 1, l, sl)  
-
-
-#rendre en dynamique (retenir les res des difference valeur de j et l)
-def jsupSLM(j, l, sl, ligne):# l taille de la sous sequence  , S la sous sequence
-    #print("\n")
-    
-    #print("jsupSLMP(j=",j,", l=",l,", sl, ligne)")
-    if l == 0 :
-        for ti in ligne[0:j+1] :
-            if ti == 2:
-                #print("false")
-                return False
-        #print("true")
-        return True
-
-    elif j < sl[l-1] - 1:
-        #print("false")
-        return False
-
-    elif j == sl[l-1] - 1:#
-        if l == 1:
-            for tti in ligne[0:j+1]:
-                if tti == 1:
-                    return False
-            #print("true")
-            return True
-            
-        else :
-            #print("false")
-            return False
-
-    if ligne[j] == -1:
-        #print("ligne[j-1]==-1")
-        for i in ligne[j - sl[l-1]+1:j ] : # cas une case blanche dans sl dans la suite 
-            #print(i)
-            if i == 1 :
-                #print("pas noire")
-                return jsupSLM(j - 1, l, sl, ligne)
-        """if j-sl[l-1] +1 < 0: #cas pas la place de mettre les cases noires
-            #print("j-sl[l-1] < 0:")
-            #print("false")
-            return jsupSLM(j - 1, l, sl, ligne)"""
-            
-            
-        if ligne[j - sl[l-1]] == 2: 
-                #print("ligne[j-sl[l-1]-1] == 2:")
-                #print("false")
-                return jsupSLM(j - 1, l, sl, ligne) # cas une case noire de trop par rapport a la taille
-
-        """if j-sl[l-1] +1 == 0: #cas pile la place de mettre les cases noires
-            #print("j-sl[l-1] == 0:")
-            #print("true")
-            return True"""
-        
-
-        #print("ne sais pas")        
-        return jsupSLM(j - sl[l-1]-1, l-1, sl, ligne) or jsupSLM(j - 1, l, sl, ligne)   
-
-
-    if ligne[j] == 1:#blanc
-
-        #print("ligne[j-1]==1")
-        return jsupSLM(j - 1, l, sl, ligne) # case blanche
-
-
-    if ligne[j] == 2:#noire
-
-        #print("ligne[j-1]==2:")
-        for i in ligne[j - sl[l-1]+1:j ] : # cas une case blanche dans sl dans la suite 
-            if i == 1:
-                #print("false")
-                return False
-            
-        """if j-sl[l-1] +1 < 0: #cas pas la place de mettre les cases noires
-            #print("j-sl[l-1] < 0:")
-            #print("false")
-            return False"""
-
-        """if j-sl[l-1] +1 == 0: #cas pile la place de mettre les cases noires
-            #print("j-sl[l-1] == 0:")
-            #print("true")
-            return True
-        else :"""
-            
-        if ligne[j - sl[l-1]] == 2: 
-                #print("ligne[j-sl[l-1]-1] == 2:")
-                #print("false")
-            return False # cas une case noire de trop par rapport a la taille 
-        else :
-
-            return jsupSLM(j - sl[l-1] -1, l - 1, sl, ligne) # cas case noire trouvée 
-
-
-
+from Generalisation1_2 import *
 
 def colorL(a,i):
     """
@@ -134,13 +16,13 @@ def colorL(a,i):
             D= dict()              
             #print(i,len(a.tabil[i]), a.tabil[i], a.Gr[i])
             #test si un coloriage possible quand la case est noire
-            noirV = jsupSLMO(a.M-1, len(a.tabil[i]), a.tabil[i], a.Gr[i], D) 
+            noirV = VerifGrilleMO(a.M-1, len(a.tabil[i]), a.tabil[i], a.Gr[i], D) 
             #print("noirV ",noirV)
             #print(a.Gr[i])
             a.Gr[i][indice]= 1   
             D1= dict()
             #test si un coloriage possible quand la case est blanche
-            blancV = jsupSLMO(a.M-1, len(a.tabil[i]), a.tabil[i], a.Gr[i], D1)
+            blancV = VerifGrilleMO(a.M-1, len(a.tabil[i]), a.tabil[i], a.Gr[i], D1)
             
             #print("blancV ",blancV)
             #print(a.Gr[i])
@@ -161,10 +43,10 @@ def colorL(a,i):
                 a.Gr[i][indice]= 1   #sinon la case est blanche
                 a.SetLi+=[indice]    #ajout de la colonne à la liste des colonnes modifiées
             
-            
+    D3 = dict()        
     
     #print("fin")                 
-    return True
+    return VerifGrilleMO(a.M-1, len(a.tabil[i]), a.tabil[i], a.Gr[i], D3)
 
 def colorC(a,j):
     """
@@ -181,14 +63,14 @@ def colorC(a,j):
                 colonne[indice]=2      #mise à jour de la colonne
                 D=dict()
                 #test si un coloriage possible quand la case est noire
-                noirV = jsupSLMO(a.N-1, len(a.tabic[j]), a.tabic[j], colonne, D)
+                noirV = VerifGrilleMO(a.N-1, len(a.tabic[j]), a.tabic[j], colonne, D)
                 #print("noirV ",noirV)
                 #print(colonne)
                 a.Gr[indice][j]= 1
                 colonne[indice]=1      #mise à jour de la colonne
                 D1= dict()
                 #test si un coloriage possible quand la case est blanche
-                blancV = jsupSLMO(a.N-1, len(a.tabic[j]), a.tabic[j], colonne, D1)
+                blancV = VerifGrilleMO(a.N-1, len(a.tabic[j]), a.tabic[j], colonne, D1)
                 #print("blancV",blancV)
                 #print("colonne",colonne)
 
@@ -207,12 +89,14 @@ def colorC(a,j):
                     if not(blancV):
                         return False
 
-                    a.Gr[indice][j]= 1    #la case est blanche
+                    a.Gr[indice][j]= 1
+                    colonne[indice]=1     #la case est blanche
                     a.SetCi+=[indice]    #ajout de la colonne à la liste des colonnes modifiées
                     
                 #print("setCi",a.SetCi)
     #print(a.SetCi)
-    return True # colonne recupe
+    D3= dict()
+    return VerifGrilleMO(a.N-1, len(a.tabic[j]), a.tabic[j], colonne, D3)
 
 
 def coloration2(A):
@@ -278,10 +162,10 @@ def coloration2(A):
         
         
         
-    affichage_fenetre(a)
+    #affichage_fenetre(a)
     
     #verifie si toute la grille est coloriée
-    verif3 = a.EstComplete(0)   # verif3 = True si toutes les cases sont coloriées
+    verif3 = a.EstComplete()   # verif3 = True si toutes les cases sont coloriées
     print(a.Kp)
     if verif3 == True:
        
@@ -290,7 +174,3 @@ def coloration2(A):
     else :
         print(verif4)            # toutes les cases ne sont pas coloriées
         return verif4
-    
-
-
-

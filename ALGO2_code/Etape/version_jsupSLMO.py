@@ -142,3 +142,93 @@ def jsupSLMO(j, l, sl, ligne, D):
                     
             return D[k, l - 1]
             #return jsupSLM(j - sl[l-1] -1, l - 1, sl, ligne) # cas case noire trouvée 
+
+#rendre en dynamique (retenir les res des difference valeur de j et l)
+def jsupSLM(j, l, sl, ligne):# l taille de la sous sequence  , S la sous sequence
+    #print("\n")
+    
+    #print("jsupSLMP(j=",j,", l=",l,", sl, ligne)")
+    if l == 0 :
+        for ti in ligne[0:j+1] :
+            if ti == 2:
+                #print("false")
+                return False
+        #print("true")
+        return True
+
+    elif j < sl[l-1] - 1:
+        #print("false")
+        return False
+
+    elif j == sl[l-1] - 1:#
+        if l == 1:
+            for tti in ligne[0:j+1]:
+                if tti == 1:
+                    return False
+            #print("true")
+            return True
+            
+        else :
+            #print("false")
+            return False
+
+    if ligne[j] == -1:
+        #print("ligne[j-1]==-1")
+        for i in ligne[j - sl[l-1]+1:j ] : # cas une case blanche dans sl dans la suite 
+            #print(i)
+            if i == 1 :
+                #print("pas noire")
+                return jsupSLM(j - 1, l, sl, ligne)
+        """if j-sl[l-1] +1 < 0: #cas pas la place de mettre les cases noires
+            #print("j-sl[l-1] < 0:")
+            #print("false")
+            return jsupSLM(j - 1, l, sl, ligne)"""
+            
+            
+        if ligne[j - sl[l-1]] == 2: 
+                #print("ligne[j-sl[l-1]-1] == 2:")
+                #print("false")
+                return jsupSLM(j - 1, l, sl, ligne) # cas une case noire de trop par rapport a la taille
+
+        """if j-sl[l-1] +1 == 0: #cas pile la place de mettre les cases noires
+            #print("j-sl[l-1] == 0:")
+            #print("true")
+            return True"""
+        
+
+        #print("ne sais pas")        
+        return jsupSLM(j - sl[l-1]-1, l-1, sl, ligne) or jsupSLM(j - 1, l, sl, ligne)   
+
+
+    if ligne[j] == 1:#blanc
+
+        #print("ligne[j-1]==1")
+        return jsupSLM(j - 1, l, sl, ligne) # case blanche
+
+
+    if ligne[j] == 2:#noire
+
+        #print("ligne[j-1]==2:")
+        for i in ligne[j - sl[l-1]+1:j ] : # cas une case blanche dans sl dans la suite 
+            if i == 1:
+                #print("false")
+                return False
+            
+        """if j-sl[l-1] +1 < 0: #cas pas la place de mettre les cases noires
+            #print("j-sl[l-1] < 0:")
+            #print("false")
+            return False"""
+
+        """if j-sl[l-1] +1 == 0: #cas pile la place de mettre les cases noires
+            #print("j-sl[l-1] == 0:")
+            #print("true")
+            return True
+        else :"""
+            
+        if ligne[j - sl[l-1]] == 2: 
+                #print("ligne[j-sl[l-1]-1] == 2:")
+                #print("false")
+            return False # cas une case noire de trop par rapport a la taille 
+        else :
+
+            return jsupSLM(j - sl[l-1] -1, l - 1, sl, ligne) # cas case noire trouvée 

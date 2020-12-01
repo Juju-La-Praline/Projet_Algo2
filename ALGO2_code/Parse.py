@@ -2,71 +2,48 @@ from GrilleC import *
 
 a='0.txt'
 
-def creer_grille(z):# crée la grille a partir d'un fichier 
+def creer_grille2(z):# crée la grille a partir d'un fichier 
+    """ 
+    crée une grille à partir des valeurs du fichier z
     
-    tabic = []
-    tabil = []
+    """
+    tabic = []       # liste des sl des colonnes
+    tabil = []       # liste des sl des lignes
     N = 0
     M = 0
-    cptLi = 0
-    cptCo = 0
     tail_max_L = 0
     tail_max_C = 0
-    t_m_i = 0
-    t_m_i2 = 0
+    
     hashtag = False
     fichier = open(z, 'r')
-
+    i=0
     for ligne in fichier:
 
-        cptLi = cptLi + 1
-        cptCo = cptCo + 1
-        slP=[]
-
-        if t_m_i > t_m_i2 :
-            t_m_i2 = t_m_i
-
-        t_m_i = 0
-
-        for carac in ligne:
+        i=i+1
+        if ligne[0]== '#':        #si la ligne commence par un #
+            hashtag = True
+            N=i-1                 #nombre de lignes 
+            i=0
+        
+        elif hashtag:                          #cas des colonnes
+            ligne_split=ligne.split()
+            Vtemp = [int(i) for i in ligne_split]  #sequence d'entier d'une colonne
             
-            if carac == '#':
-                hashtag = True
-                N = cptLi - 1
-                tail_max_L = t_m_i2
-                t_m_i2 = 0
-                cptCo = cptCo - cptLi
+            if Vtemp != []:
+                tail_max_C=max(len(Vtemp),tail_max_C)
+            tabic+= [Vtemp]                   #ajout à la liste des sl des colonnes
+            
+        else:                                      # cas des lignes
+            ligne_split2 = ligne.split()
+            Vtemp2=[int(i) for i in ligne_split2]  #sequence d'entier d'une ligne
 
-            elif carac == ' ':
-                None
-
-            elif carac == '\n':
-                None
-
-            else:
-                slP.append(int(carac))
-                t_m_i = t_m_i + 1
-
-
-        if hashtag :
-            tabic = tabic + [slP]
-
-        else:
-            tabil = tabil + [slP]
-
-    M = cptCo
-    tail_max_C = t_m_i2       
+            if Vtemp2 != []: 
+                tail_max_L=max(len(Vtemp2),tail_max_L)
+            tabil+= [Vtemp2]                #ajout à la liste des sl des lignes
+            
+    M=i                                     #nombre de colonnes      
     fichier.close()
-    
-    del tabic[0]
-    '''print(tail_max_L)
-    print(tail_max_C)
-    print(tabil)
-    print(tabic)
-    print(N, M)'''
     g = Grille(N, M, tabil, tabic, tail_max_L, tail_max_C)
-    
-    return g
 
-    
+    return g
 
