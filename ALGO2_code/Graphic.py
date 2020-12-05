@@ -9,7 +9,7 @@ def affichage_fenetre(grille):
     
     largeur = (grille.nMl + grille.M) * 10
     hauteur = (grille.nMc + grille.N) * 10
-    taille_case = 15
+    taille_case = 10
     fenetre = Tk()
     nMc = grille.nMc*1.5
     nMl = grille.nMl*1.5
@@ -63,18 +63,18 @@ def affichage_fenetre(grille):
         x1q = nMl * taille_case/2
         y1q = taille_case * (o+1) + nMc * taille_case + taille_case/2
 
-        can.create_text(x1q, y1q, text=strl,font = ("Helvetica", taille_case))
+        can.create_text(x1q, y1q, text=strl, font = ("Helvetica", taille_case))
         
    
     
     for p in range(len(grille.tabic)) :
         blocC=grille.tabic[p]
-        strC=''.join(str(elem) for elem in blocC)
+        strC='\n'.join(str(elem) for elem in blocC)
 
         x1r = taille_case * (p+1) + nMl * taille_case + taille_case/2
         y1r = nMc * taille_case/2
-
-        can.create_text(x1r, y1r, text= strC, width=1, font = ("Helvetica", taille_case) )
+        #//1.5 pour les cas ou on a 2 chiffres dans notre nombre
+        can.create_text(x1r, y1r, text= strC, font = ("Helvetica", int(taille_case//1.5)) ) 
 
     can.pack(fill=BOTH, expand=1)
     

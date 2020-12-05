@@ -8,25 +8,25 @@ def colorL(a,i):
     
     """
     
-    for indice in range(a.M) :  #parcours de toutes les cases de la ligne
+    for indice in range(a.M) :  #parcours de toutes les cases de la ligne i
         
         
         if a.Gr[i][indice] == -1:  #si une case est indéterminée
             a.Gr[i][indice] = 2     
             D = dict()              
             
-            #test si un coloriage possible quand la case est noire
+            #test si un coloriage est possible quand la case est noire
             noirV = VerifGrilleMO(a.M - 1, len(a.tabil[i]), a.tabil[i], a.Gr[i], D) 
             
             a.Gr[i][indice] = 1   
             D1 = dict()
-            #test si un coloriage possible quand la case est blanche
+            #test si un coloriage est possible quand la case est blanche
             blancV = VerifGrilleMO(a.M - 1, len(a.tabil[i]), a.tabil[i], a.Gr[i], D1)
             
             
-            if noirV :    #si coloriage possible de la ligne qd la case est noire
-                if blancV:  #si coloriage possible de la ligne qd la case est blanche
-                    a.Gr[i][indice] = -1  #on ne sait pas la vraie couleur donc c'est indéterminée
+            if noirV :    #si coloriage possible de la ligne quand la case est noire
+                if blancV:  #si coloriage possible de la ligne quand la case est blanche
+                    a.Gr[i][indice] = -1  #on ne sait pas la vraie couleur donc la case est indéterminée
                     
                     
                 else :       #coloriage impossible quand la case est blanche
@@ -69,8 +69,8 @@ def colorC(a,j):
                 blancV = VerifGrilleMO(a.N - 1, len(a.tabic[j]), a.tabic[j], colonne, D1)
                 
 
-                if noirV :       #si coloriage possible de la ligne qd la case est noire
-                    if blancV:   #si coloriage possible de la ligne qd la case est blanche
+                if noirV :       #si coloriage possible de la ligne quand la case est noire
+                    if blancV:   #si coloriage possible de la ligne quand la case est blanche
                         a.Gr[indice][j] = -1   #on ne sait pas la vraie couleur donc c'est indéterminée
                         colonne[indice] = -1    #mise à jour de la colonne
                         
@@ -96,8 +96,8 @@ def colorC(a,j):
 
 def coloration2(A):
     """
-    affiche la grille A coloriées si possible ainsi que les séquences d'entiers
-    des lignes et colonnes correspondantes
+    retourne la grille A coloriée (si possible) avec True si elle a été coloriée ou False 
+    si une coloration est impossible ou "ne sait pas" s'il reste des cases non coloriées.
     
     """
     a  = deepcopy(A)                   #a grille
@@ -108,14 +108,14 @@ def coloration2(A):
     verif = False               #variable pour vérifier si coloration possible d'une ligne
     verif2 = False              #variable pour vérifier si coloration possible d'une colonne
     verif3 = True               #variable pour vérifier si toutes les cases sont coloriées
-    verif4 = "ne sait pas"      # cas où toutes mes cases ne sont pas coloriées à la fin de l'algo
+    verif4 = "ne sait pas"      # cas où toutes les cases ne sont pas coloriées à la fin de l'algo
     nouv= []
     nouv2 = []
     while ligneAvoir != [] or colonneAvoir != [] : #tant qu'il reste des cas à examiner
         
         
         for i in ligneAvoir :     #parcours des lignes 
-            #print(i)
+            
             verif = colorL(a,i)
             
             if not(verif):    #si coloriage impossible retourne False
@@ -125,8 +125,8 @@ def coloration2(A):
             
             colonneAvoir += [i for i in nouv if i not in colonneAvoir] #ajout dans les colonnes à voir
             
-            
-            a.SetLi = []   #remise à zéro de la liste des colonnes modifiées lors d'un appel à colorL(a,i)
+               
+            a.SetLi = []   #remise à zéro de SetLi = la liste des colonnes modifiées lors d'un appel à colorL(a,i)
             
             
         ligneAvoir=[]
@@ -145,7 +145,7 @@ def coloration2(A):
             
             
             
-            a.SetCi = []   #remise à zéro de la liste des lignes modifiées lors d'un appel à colorC(a,j)
+            a.SetCi = []   #remise à zéro de SetCi = la liste des lignes modifiées lors d'un appel à colorC(a,j)
         colonneAvoir = []
         nouv2 = []
         
@@ -157,9 +157,8 @@ def coloration2(A):
     verif3 = a.EstComplete()   # verif3 = True si toutes les cases sont coloriées
     
     if verif3 == True:
-       
-        
+    
         return verif3, a
-    else :
-                    # toutes les cases ne sont pas coloriées
+    else :     # toutes les cases ne sont pas coloriées
+                   
         return verif4, a
