@@ -43,11 +43,11 @@ if test == 3:           #test de resolution complete pour toutes les grilles
         #res = coloration2(g)
         verif2,g4 = enumeration(g)
         tempslo2=time.time()
-        tempslo3=tempslo2-tempslo
+        tempslo3=tempslo2-tempslo   #temsp d'execution du fichier i
         print(i,"fait",tempslo3)
     fin = time.time()
     tempt += fin - debut
-    print(tempt)
+    print(tempt)            #temps d'execution total
 
 if test == 4:         #test de resolution partielle pour toutes les grilles 
     tempt = 0
@@ -58,10 +58,10 @@ if test == 4:         #test de resolution partielle pour toutes les grilles
         g = creer_grille2(i)
         verif2,g4  = coloration2(g)
         tempslo2=time.time()
-        tempslo3=tempslo2-tempslo
+        tempslo3=tempslo2-tempslo   #temsp d'execution du fichier i
         print(i,"fait",tempslo3)
         
     fin = time.time()
     tempt += fin - debut
-    print(tempt)
+    print(tempt)       #temps d'execution total
     
