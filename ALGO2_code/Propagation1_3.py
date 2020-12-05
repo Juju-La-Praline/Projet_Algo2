@@ -96,8 +96,8 @@ def colorC(a,j):
 
 def coloration2(A):
     """
-    affiche la grille A coloriées si possible ainsi que les séquences d'entiers
-    des lignes et colonnes correspondantes
+    retourne la grille A coloriée (si possible) avec True si elle a été coloriée ou False 
+    si une coloration est impossible ou "ne sait pas" s'il reste des cases non coloriées.
     
     """
     a  = deepcopy(A)                   #a grille
@@ -157,9 +157,8 @@ def coloration2(A):
     verif3 = a.EstComplete()   # verif3 = True si toutes les cases sont coloriées
     
     if verif3 == True:
-       
-        
+    
         return verif3, a
-    else :
-                    # toutes les cases ne sont pas coloriées
+    else :     # toutes les cases ne sont pas coloriées
+                   
         return verif4, a
