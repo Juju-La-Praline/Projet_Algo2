@@ -16,12 +16,12 @@ def colorL(a,i):
             D = dict()              
             
             #test si un coloriage possible quand la case est noire
-            noirV = VerifGrilleMO(a.M-1, len(a.tabil[i]), a.tabil[i], a.Gr[i], D) 
+            noirV = VerifGrilleMO(a.M - 1, len(a.tabil[i]), a.tabil[i], a.Gr[i], D) 
             
             a.Gr[i][indice] = 1   
             D1 = dict()
             #test si un coloriage possible quand la case est blanche
-            blancV = VerifGrilleMO(a.M-1, len(a.tabil[i]), a.tabil[i], a.Gr[i], D1)
+            blancV = VerifGrilleMO(a.M - 1, len(a.tabil[i]), a.tabil[i], a.Gr[i], D1)
             
             
             if noirV :    #si coloriage possible de la ligne qd la case est noire
@@ -57,16 +57,16 @@ def colorC(a,j):
     for indice in range(a.N) :    #parcours des cases de la colonne
             if a.Gr[indice][j] == -1:   #si une case est indéterminée
                 a.Gr[indice][j] = 2
-                colonne[indice] =2      #mise à jour de la colonne
+                colonne[indice] = 2      #mise à jour de la colonne
                 D=dict()
                 #test si un coloriage possible quand la case est noire
-                noirV = VerifGrilleMO(a.N-1, len(a.tabic[j]), a.tabic[j], colonne, D)
+                noirV = VerifGrilleMO(a.N - 1, len(a.tabic[j]), a.tabic[j], colonne, D)
                 
                 a.Gr[indice][j] = 1
                 colonne[indice] = 1      #mise à jour de la colonne
                 D1= dict()
                 #test si un coloriage possible quand la case est blanche
-                blancV = VerifGrilleMO(a.N-1, len(a.tabic[j]), a.tabic[j], colonne, D1)
+                blancV = VerifGrilleMO(a.N - 1, len(a.tabic[j]), a.tabic[j], colonne, D1)
                 
 
                 if noirV :       #si coloriage possible de la ligne qd la case est noire
@@ -91,7 +91,7 @@ def colorC(a,j):
                 
     D3= dict()
     # on verifie que l'instance qui nous a été donné n'est pas fausse
-    return VerifGrilleMO(a.N-1, len(a.tabic[j]), a.tabic[j], colonne, D3)
+    return VerifGrilleMO(a.N - 1, len(a.tabic[j]), a.tabic[j], colonne, D3)
 
 
 def coloration2(A):
@@ -119,7 +119,7 @@ def coloration2(A):
             verif = colorL(a,i)
             
             if not(verif):    #si coloriage impossible retourne False
-                return False,a
+                return False, A
             
             nouv += [i for i in a.SetLi if i not in nouv] #ajout à nouv des colonne où une case a été coloriée 
             
@@ -137,7 +137,7 @@ def coloration2(A):
             verif2 = colorC(a,j)
             
             if not(verif2):
-                return False,a
+                return False, A
 
             nouv2 += [i for i in a.SetCi if i not in nouv2] #ajout à nouv des lignes où une case a été coloriée  
             
@@ -159,7 +159,7 @@ def coloration2(A):
     if verif3 == True:
        
         
-        return verif3,a
+        return verif3, a
     else :
                     # toutes les cases ne sont pas coloriées
-        return verif4,a
+        return verif4, a

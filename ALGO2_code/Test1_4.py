@@ -5,7 +5,7 @@ from Parse import *
 from MethodeComplete2_1 import *
 import time
 
-test = 2
+test = 0
 
 fichier=['0.txt','1.txt','2.txt','3.txt','4.txt','5.txt','6.txt','7.txt','8.txt','9.txt','10.txt','11.txt','12.txt','13.txt','14.txt','15.txt','16.txt']
 
@@ -16,20 +16,20 @@ if test == 0:
     affichage_fenetre(g2)
 
 if test == 1:    
-    g1 = creer_grille2(fichier[10])
+    g1 = creer_grille2(fichier[16])
 
     verif2,g3 = enumeration(g1)
     affichage_fenetre(g3)
 
 if test == 2 :
     temp = 0
-    
-    n = 5
+    numeroF = 16
+    n = 10
     for i in range(0,n):
         debut = time.time()
-        g = creer_grille2(fichier[0])
-        verif2,g4 = coloration2(g)
-        #verif2,g4 = enumeration(g)
+        g = creer_grille2(fichier[numeroF])
+        #verif2,g4 = coloration2(g)
+        verif2,g4 = enumeration(g)
         fin = time.time()
         temp += fin - debut
 

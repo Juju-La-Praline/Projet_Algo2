@@ -3,57 +3,57 @@ from copy import *
 from Graphic import *
 
 def enumeration(A): 
+
     ok,a1 = coloration2(A)
     a = deepcopy(a1)
+
     if ok == False:
        return False
     
     else:
         a.EstComplete()
-
-        ok1,b = enum_rec(a,a.Kn,1)
+        ok1,b = enum_rec(a, a.Kn,1)
 
         if ok1 == False:
-            ok2,c = enum_rec(a,a.Kn,2)
-            return ok1 or ok2,c
-        return ok1 or ok2,b
+            ok2,c = enum_rec(a, a.Kn,2)
+            return ok1 or ok2, c
+            
+        return ok1 or ok2, b
         #return enum_rec(a,a.Kn,1) or enum_rec(a,a.Kn,2)
         
         
         
 
-def enum_rec(A,indice,c):
+def enum_rec(A, indice, c):
 
-    
     if indice == A.N * A.M:
         return True,A
     
     i = indice // A.M 
     j = indice % A.M
 
-    
-    ok,a=coloration_propagation(A,i,j,c)
+    ok,a=coloration_propagation(A, i, j, c)
     
     if ok == False:
-        
-        return False,a
+        return False, A
+
     if ok == True:
-        
-        #affichage_fenetre(a)
-        return True,a
+        return True, a
     
     a.EstComplete()
     
-    ok1,b = enum_rec(a,a.Kn,1)
+    ok1,b = enum_rec(a, a.Kn, 1)
     if ok1 == False:
-        ok2,c = enum_rec(a,a.Kn,2)
-        return ok1 or ok2,c
-    return ok1 or ok2,b
+        ok2,c = enum_rec(a, a.Kn, 2)
+
+        return ok1 or ok2, c
+
+    return ok1 or ok2, b
     #return enum_rec(a,a.Kn,1) or enum_rec(a,a.Kn,2)
 
 
 
-def coloration_propagation(A,i,j,c):
+def coloration_propagation(A, i, j, c):
     a  = deepcopy(A)  
     a.Gr[i][j] = c
     
@@ -71,11 +71,10 @@ def coloration_propagation(A,i,j,c):
         
         for i in ligneAvoir :
             
-            verif = colorL(a,i)
+            verif = colorL(a, i)
             
-            if not(verif):
-                
-                return False,a 
+            if not(verif): 
+                return False, A 
             
             nouv += [i for i in a.SetLi if i not in nouv] #colone j ou une case a eté  coloriée 
             
@@ -88,11 +87,10 @@ def coloration_propagation(A,i,j,c):
 
         for j in coloneAvoir :
            
-            verif2 = colorC(a,j)
+            verif2 = colorC(a, j)
             
             if not(verif2):
-                
-                return False,a 
+                return False, A 
 
             nouv2 += [i for i in a.SetCi if i not in nouv2] #colone j ou une case a eté  coloriée 
             

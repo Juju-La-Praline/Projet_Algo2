@@ -9,15 +9,15 @@ def VerifGrille(j, l, sl):
     if l == 0 :       #il n'y a pas de bloc
         return True
                      #il y a au moins 1 bloc
-    elif j < sl[l-1] - 1:   #j est trop petit
+    elif j < sl[l - 1] - 1 :   #j est trop petit
         return False
     
-    elif j == sl[l-1] - 1: #il y a assez de place pour un bloc seuleument
+    elif j == sl[l - 1] - 1 : #il y a assez de place pour un bloc seuleument
 
-        if l == 1:       
+        if l == 1 :       
 
             return True
         else :
             return False
-    else:                   #appel récursif case j noire ou blanche
-        return VerifGrille(j - sl[l-1] - 1, l - 1, sl ) or VerifGrille(j - 1, l, sl) 
+    else :                   #appel récursif case j noire ou blanche
+        return VerifGrille(j - sl[l - 1] - 1, l - 1, sl ) or VerifGrille(j - 1, l, sl) 
