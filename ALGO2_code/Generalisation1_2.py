@@ -1,9 +1,7 @@
 
 
 def VerifGrilleMO(j, l, sl, ligne, D):
-    #print("\n")
     
-    #print("jsupSLMP(j=",j,", l=",l,", sl, ligne)")
     """
     pour j un indice, une sous sequence sl de taille l, une ligne 
     la fonction retourne True si une coloration de la ligne est possible, False sinon.
@@ -11,9 +9,7 @@ def VerifGrilleMO(j, l, sl, ligne, D):
     Une case à valeur 1 est blanche, 2 est noire et -1 est indéterminée.
     """
     
-    #dictionnaire des valeurs [j,l] : False ou True 
-    
-    
+ 
     
     if l == 0 :                     #cas où il n'y a pas de blocs 
 
@@ -50,7 +46,7 @@ def VerifGrilleMO(j, l, sl, ligne, D):
                     
                 return D[j - 1, l] 
                 
-                 # cas une case noire de trop par rapport a la taille
+                 
         
         
         for i in ligne[j - sl[l - 1] + 1:j] : #parcours des j - sl[l-1] cases précédent j  # cas une case blanche dans sl dans la suite 
