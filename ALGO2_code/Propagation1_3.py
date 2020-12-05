@@ -115,7 +115,7 @@ def coloration2(A):
         
         
         for i in ligneAvoir :     #parcours des lignes 
-            #print(i)
+            
             verif = colorL(a,i)
             
             if not(verif):    #si coloriage impossible retourne False
