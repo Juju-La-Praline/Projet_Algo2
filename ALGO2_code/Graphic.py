@@ -80,5 +80,5 @@ def affichage_fenetre(grille):
     
     fenetre.mainloop()
 
-    #for i in range()
+    
 

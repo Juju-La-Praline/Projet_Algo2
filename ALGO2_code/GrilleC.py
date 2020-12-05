@@ -16,12 +16,12 @@ class Grille:
         self.SetCi=[]           # la liste des lignes modifiées lors d'un appel à colorC(a,j)
         self.SetLi=[]           # liste des colonnes modifiées lors d'un appel à colorL(a,i)
         self.Kn = 0            
-        self.Kp = 0
+        
         for i in range(self.N) :# initialisation de la grille à -1
 
             ligne = list()
 
-            for j in range(self.M) :
+            for j in range(self.M):
 
                 ligne.append(-1)
                 
@@ -46,7 +46,7 @@ class Grille:
                     
                     return False
                     
-        print("true")
+        
         return True
                 
             
