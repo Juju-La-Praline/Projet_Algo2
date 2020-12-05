@@ -126,7 +126,7 @@ def coloration2(A):
             colonneAvoir += [i for i in nouv if i not in colonneAvoir] #ajout dans les colonnes à voir
             
                
-            a.SetLi = []   #remise à zéro de SetLi : la liste des colonnes modifiées lors d'un appel à colorL(a,i)
+            a.SetLi = []   #remise à zéro de SetLi = la liste des colonnes modifiées lors d'un appel à colorL(a,i)
             
             
         ligneAvoir=[]
@@ -145,7 +145,7 @@ def coloration2(A):
             
             
             
-            a.SetCi = []   #remise à zéro de SetCi la liste des lignes modifiées lors d'un appel à colorC(a,j)
+            a.SetCi = []   #remise à zéro de SetCi = la liste des lignes modifiées lors d'un appel à colorC(a,j)
         colonneAvoir = []
         nouv2 = []
         
