@@ -63,7 +63,7 @@ def coloration_propagation(A, i, j, c):
     a  = deepcopy(A)  
     a.Gr[i][j] = c
     
-    coloneAvoir = [j]
+    colonneAvoir = [j]
     ligneAvoir = [i]
     
     verif = False                    #variable pour vérifier si coloration possible d'une ligne
@@ -72,7 +72,7 @@ def coloration_propagation(A, i, j, c):
     verif4 = "ne sait pas"           # cas où toutes les cases ne sont pas coloriées à la fin de l'algo
     nouv= []
     nouv2 =  []
-    while ligneAvoir != [] or coloneAvoir != [] :   #tant qu'il reste des cas à examiner
+    while ligneAvoir != [] or colonneAvoir != [] :   #tant qu'il reste des cas à examiner
         
         
         for i in ligneAvoir :            #parcours des lignes
@@ -84,7 +84,7 @@ def coloration_propagation(A, i, j, c):
             
             nouv += [i for i in a.SetLi if i not in nouv]  #ajout à nouv des colonne où une case a été coloriée 
             
-            coloneAvoir += [i for i in nouv if i not in coloneAvoir]    #ajout dans les colonnes à voir
+            colonneAvoir += [i for i in nouv if i not in colonneAvoir]    #ajout dans les colonnes à voir
             
             
             a.SetLi = []            #remise à zéro de SetLi = la liste des colonnes modifiées lors d'un appel à colorL(a,i)
@@ -92,7 +92,7 @@ def coloration_propagation(A, i, j, c):
         ligneAvoir = []
         nouv = []
 
-        for j in coloneAvoir :      #parcours des colonnes
+        for j in colonneAvoir :      #parcours des colonnes
            
             verif2 = colorC(a, j)
             
@@ -106,7 +106,7 @@ def coloration_propagation(A, i, j, c):
             
             
             a.SetCi = []    #remise à zéro de SetCi = la liste des lignes modifiées lors d'un appel à colorC(a,j)
-        coloneAvoir = []
+        colonneAvoir = []
         nouv2 = []
         
        
